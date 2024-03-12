@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'homes#top'
-  resources :books
+  resources :books #resources method
 =begin
   get 'homes/top'
   get 'books/new'
-  get 'books/index'
+  get 'books'
+  post 'books' => 'books#create'
   get 'books/show'
   get 'books/edit'
 =end
