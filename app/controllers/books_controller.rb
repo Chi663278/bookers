@@ -7,16 +7,31 @@ class BooksController < ApplicationController
   def create
     book = Book.new(book_params) #formから送られてくるデータはparamsの中に入っています
     book.save #データをデータベースに保存するmethod
-    redirect_to '/books/show' #リダイレクト
+    redirect_to book_path(book.id) #リダイレクト
   end
 
-  def index
+  def index #一覧画面用アクション
+    @books = Book.all #all method (モデルがやりとりしているデータベースのテーブルに保存されている、全てのレコードをまとめて取得)
   end
 
   def show
+    @book = Book.find(params[:id])
   end
 
   def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id)
+  end
+
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to '/books'
   end
 
   private #ストロングパラメータbook_paramsを定義
